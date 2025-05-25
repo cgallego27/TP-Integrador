@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simple</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f4f8;
+        }
+        .calculator-container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #4f46e5;
+            color: #ffffff;
+        }
+        .btn-primary:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+        }
+        #message-box {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            background-color: #e0f2fe;
+            color: #0c4a6e;
+            border: 1px solid #90cdf4;
+            font-size: 1.1rem;
+            font-weight: 500;
+            min-height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1 class="text-3xl font-bold mb-6 text-gray-800">Calculadora Básica</h1>
+        <button id="start-calculation" class="btn btn-primary">Iniciar Cálculo</button>
+        <div id="message-box" class="mt-6">
+            Presiona "Iniciar Cálculo" para comenzar.
+        </div>
+    </div>
+
+    <script>
+        const startCalculationButton = document.getElementById('start-calculation');
+        const messageBox = document.getElementById('message-box');
+
+        function showMessage(message) {
+            messageBox.textContent = message;
+        }
+
+        startCalculationButton.addEventListener('click', () => {
+            const numero1Str = prompt("Ingresa el primer número:");
+
+            if (numero1Str === null || isNaN(Number(numero1Str)) || numero1Str.trim() === '') {
+                showMessage("Operación cancelada o entrada inválida para el primer número.");
+                return;
+            }
+            const numero1 = Number(numero1Str);
+
+            const numero2Str = prompt("Ingresa el segundo número:");
+
+            if (numero2Str === null || isNaN(Number(numero2Str)) || numero2Str.trim() === '') {
+                showMessage("Operación cancelada o entrada inválida para el segundo número.");
+                return;
+            }
+            const numero2 = Number(numero2Str);
+
+            const operacion = prompt("Elige la operación (+, -, *, /):");
+
+            let resultado;
+
+            if (operacion === '+') {
+                resultado = numero1 + numero2;
+                showMessage(`El resultado de la suma es: ${resultado}`);
+            } else if (operacion === '-') {
+                resultado = numero1 - numero2;
+                showMessage(`El resultado de la resta es: ${resultado}`);
+            } else if (operacion === '*') {
+                resultado = numero1 * numero2;
+                showMessage(`El resultado de la multiplicación es: ${resultado}`);
+            } else if (operacion === '/') {
+                if (numero2 === 0) {
+                    showMessage("No se puede dividir por cero.");
+                } else {
+                    resultado = numero1 / numero2;
+                    showMessage(`El resultado de la división es: ${resultado}`);
+                }
+            } else {
+                showMessage("Operación no válida. Por favor, elige entre +, -, * o /.");
+            }
+        });
+    </script>
+</body>
+</html>
